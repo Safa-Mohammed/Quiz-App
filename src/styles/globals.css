@@ -1,0 +1,7 @@
+@import'./responsive.css';
+@import'./variables.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
