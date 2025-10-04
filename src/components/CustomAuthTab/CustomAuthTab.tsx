@@ -16,7 +16,7 @@ export default function CustomAuthTab({icon,border,label}:CustomAuthTabProps) {
          flex flex-col space-y-2 justify-center items-center ${border}`}
     >
       <div className={`${label === "Sign up" && "pl-3"}`}>{icon}</div>
-      <span className="font-bold">{label}</span>
+      <span className="font-bold text-white">{label}</span>
     </Link>
       
       
