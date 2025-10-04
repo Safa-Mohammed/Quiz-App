@@ -9,6 +9,7 @@ interface CustomFormProps extends React.InputHTMLAttributes<HTMLInputElement> {
   placeHolder: string,
   isError?: FieldError | undefined | boolean;
   errorMessage?: string;
+  
 }
 
 const CustomInputForm = forwardRef<HTMLInputElement, CustomFormProps>(

@@ -42,7 +42,7 @@ function App() {
       children: [
         { index: true, element: <Login /> },
         { path: "login", element: <Login /> },
-        { path: "forget-password", element: <ForgetPassword /> },
+        { path: "forget-password", element: <ForgetPassword/> },
         { path: "reset-password", element: <ResetPassword /> },
         { path: "change-password", element: <ChangePassword /> },
         { path: "register", element: <Register /> },
