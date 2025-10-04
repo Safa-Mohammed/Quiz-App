@@ -5,16 +5,28 @@ import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import inputIcon from '../../../assets/Images/input icon.png'
 import mailIcon from '../../../assets/Images/mailIcon.png'
-import { useState } from 'react';
 import { Link } from "react-router-dom";
+import type { AppDispatch} from "../../../redux/store";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../../redux/slices/authSlice";
+import { EMAILVALIDATION } from '../../../utils/Validation/Validations';
+import {PASSWORD_VALIDATION} from '../../../utils/Validation/Validations';
+import { toast } from 'react-toastify';
+import { useState } from 'react';
+import {  FaEye ,FaEyeSlash} from 'react-icons/fa'
+
 
 
 export default function Login() {
-
-
-   const { pathname } = useLocation();
-   const [loading, setLoading] = useState(false);  
-   type LoginFormInputs = {
+const dispatch = useDispatch<AppDispatch>();
+const navigate = useNavigate()
+const [show, setShow] = useState(false)
+ const toggleShow = () => {
+    setShow(!show)
+  }
+  const { pathname } = useLocation();
+  type LoginFormInputs = {
   email: string;
   password: string;
 };
@@ -32,11 +44,23 @@ export default function Login() {
 
 
 
+ 
 
-    const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
-    setLoading(true); 
-  
+  const onSubmit: SubmitHandler<LoginFormInputs> = async(data) => {
+    dispatch(loginUser(data));
+    const resultAction = await dispatch(loginUser(data));
+
+    // Check if login succeeded
+    if (loginUser.fulfilled.match(resultAction)) {
+      toast.success("login successfully")
+      // Navigate to dashboard
+      navigate("/dashboard");
+    }
+    else toast.error("something wrong ")
   };
+
+
+
    return(
      <>
 
@@ -75,41 +99,35 @@ export default function Login() {
  
      
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+ <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
 
+{/* Email */}
+<div>
+  <label className="block text-white mb-3 font-nunito font-bold text-[16px]">
+    Registered email address
+  </label>
 
+  <div className="flex items-center border-4 border-white rounded-lg bg-transparent h-12 px-3">
+  <img src={mailIcon} alt="email icon" className="w-5 h-5 flex-shrink-0" />
 
-      {/* Email */}
-      <div>
-            <label className="block text-white mb-3 font-nunito font-bold text-[16px] leading-[100%] tracking-[0%]">Registered email address</label>
-             <div className="relative"> 
-
-                <img
-      src={mailIcon}
-      alt="password icon"
-      className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5"
-    />
-            <input
-              type="email"
-              {...register("email", { required: "Email is required" })}
-       className="
-      w-full 
-      px-4  
-      pl-10 pr-4 py-3         
-      border-4 border-white   
-      rounded-lg        
+  <input
+    type="email"
+    {...register("email", EMAILVALIDATION)}
+    placeholder="Type your email"
+    className="
+      flex-1
       bg-transparent
-      font-nunito font-light text-[14px] leading-[100%] tracking-[0%] 
-      pb-5
-    "      placeholder="Type your email"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm">{errors.email.message}</p>
-            )}
-             </div>
-
-      </div>
-
+      text-white
+      font-nunito font-light text-[14px]
+      pl-3
+      focus:outline-none
+    "
+  />
+</div>
+{errors.email && (
+  <p className="text-red-500 text-sm mt-1">{errors.email.message}</p>
+)}
+</div>
 
  
 
@@ -130,14 +148,10 @@ export default function Login() {
 
     {/* Input */}
     <input
-      type="password"
-      {...register("password", {
-        required: "Type your password",
-        minLength: {
-          value: 6,
-          message: "Password must be at least 6 characters",
-        },
-      })}
+     type={show ? "text" : "password"}
+      {...register 
+    ("password", PASSWORD_VALIDATION)
+    }
       className="
         w-full 
         pl-10 pr-4 py-3      
@@ -148,7 +162,17 @@ export default function Login() {
         font-nunito font-light text-[14px] leading-[100%] tracking-[0%]
       "
       placeholder="Type your password"
+      
     />
+  <FaEye className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-lg" />
+     <button
+        type="button"
+        onClick={toggleShow}
+        aria-label={show ? "Hide password" : "Show password"}
+        className="absolute inset-y-0 end-3 flex items-center"
+        >
+        {show ? <FaEye className="text-white" /> : <FaEyeSlash className="text-white" />}
+      </button>
   </div>
 
   {errors.password && (
@@ -159,7 +183,7 @@ export default function Login() {
           {/* Submit */}
 <div className="flex items-center justify-between mt-6 gap-6">
   {/* Submit Button */}
-  <button
+  <button onClick={handleSubmit(onSubmit)}
     type="submit"
     className="
       bg-white text-black

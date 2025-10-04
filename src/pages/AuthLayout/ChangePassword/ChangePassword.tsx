@@ -1,8 +1,5 @@
- 
 
  import { useLocation } from 'react-router-dom';
-import {SignInIcon,SignUpIcon}from '../../../assets/Images/SvgIcons/SvgIcons'
-import CustomAuthTab from '../../../components/CustomAuthTab/CustomAuthTab'
 import { useForm } from "react-hook-form";
 import type { SubmitHandler } from "react-hook-form";
 import inputIcon from '../../../assets/Images/input icon.png'
