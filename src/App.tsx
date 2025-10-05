@@ -26,6 +26,7 @@ import {
   Dashboard,
   GroupsData,
   GroupsList,
+  Quizzes,
   ResultsTutor,
   ResultsView,
   StudentData,
@@ -64,6 +65,8 @@ function App() {
         { path: "resultsView", element: <ResultsView /> },
         { path: "student-data", element: <StudentData /> },
         { path: "student-list", element: <StudentList /> },
+                { path: "quiz", element: <Quizzes /> },
+
       ],
     },
     {
