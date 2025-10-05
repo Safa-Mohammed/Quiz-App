@@ -19,7 +19,6 @@ message:string
 }
  
 export default function ResetPassword() {
-  const {state}=useLocation()
   const [show, setShow] = useState(false)
   const toggleShow = () => {
     setShow(!show)
@@ -29,7 +28,9 @@ export default function ResetPassword() {
     setShowp(!showp)
   }
   let navigate=useNavigate()
-  let {register,formState:{errors,isSubmitting},handleSubmit,watch,trigger}=useForm<FormData>({defaultValues:{email:state.email}})
+  	const email = useLocation()?.state?.email;
+
+  let {register,formState:{errors,isSubmitting},handleSubmit,watch,trigger}=useForm<FormData>()
 
   const OnSubmit=async(data:FormData)=>{
     try{
@@ -57,7 +58,7 @@ trigger("passwordConf")}
        className="flex flex-col w-full gap-4"
       >
         <CustomInputForm  
-          {...register("email", EMAILVALIDATION)}
+          {...register(email, EMAILVALIDATION)}
           icon={<EmailIcon/>}
           id='EmailId' 
           lable='Your Email'
