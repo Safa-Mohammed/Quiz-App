@@ -84,8 +84,8 @@ export default function ResetPassword() {
           />
 
           <CustomInputForm
-            {...register("otp", { required: "هذا الحقل مطلوب" })}
-            icon={<CheckIcon />}
+            {...register("otp", { required: "this feild is required" })}
+            icon={<EmailIcon/>}
             id="otpId"
             lable="OTP"
             type="text"
