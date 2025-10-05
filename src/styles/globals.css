@@ -5,3 +5,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+ 
+  .auth-button {
+    @apply flex items-center justify-center gap-[10px]
+    bg-[#F5F5F5] text-black w-36 h-12 rounded-[10px] font-bold 
+    hover:brightness-125 transition duration-300 ease-in-out;
+  }
+}
+/* لمعالجة مشكلة autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* يخلي الخلفية شفافة */
+  -webkit-text-fill-color: white !important; /* خلي النص أبيض */
+  caret-color: white; /* لون المؤشر */
+  transition: background-color 5000s ease-in-out 0s; /* hack لمنع الرجوع للون التلقائي */
+}
