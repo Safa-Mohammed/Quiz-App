@@ -41,11 +41,13 @@ export default function ResetPassword() {
 
   const OnSubmit = async (data: FormData) => {
     try {
-      const res = await axiosInstance.post<Res>(Auth.resetPassword, data);
+      // إرسال البيانات بدون passwordConf
+      const { passwordConf, ...submitData } = data;
+      const res = await axiosInstance.post<Res>(Auth.resetPassword, submitData);
       console.log(res);
       if (res.data?.message) {
-        navigate("/login");
         toast.success(res.data.message);
+        navigate("/login");
       }
     } catch (error: any) {
       console.log(error);
@@ -54,12 +56,15 @@ export default function ResetPassword() {
   };
 
   const password = watch("password");
+  const passwordConf = watch("passwordConf");
 
   useEffect(() => {
-    if (watch("passwordConf")) {
-      trigger("passwordConf");
-    }
-  }, [password, trigger]);
+    if (passwordConf) trigger("passwordConf");
+  }, [password, passwordConf, trigger]);
+
+  useEffect(() => {
+    if (!state?.email) navigate('/forgot-password');
+  }, [state, navigate]);
 
   return (
     <>
@@ -82,7 +87,7 @@ export default function ResetPassword() {
             {...register("otp", { required: "هذا الحقل مطلوب" })}
             icon={<CheckIcon />}
             id="otpId"
-             lable="OTP"
+            lable="OTP"
             type="text"
             placeHolder="Type your otp"
             isError={errors.otp}
@@ -105,7 +110,7 @@ export default function ResetPassword() {
                 })}
                 className="py-3 bg-transparent border border-white text-white text-sm rounded-lg block w-full ps-10 p-2.5 pr-12 placeholder-white"
                 placeholder="Type your Password"
-                autoComplete="current-password"
+                autoComplete="new-password"
               />
 
               <FaKey className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-lg" />
@@ -134,12 +139,12 @@ export default function ResetPassword() {
                 type={showp ? "text" : "password"}
                 {...register("passwordConf", {
                   required: "Confirm Password is required",
-                  validate: (passwordConf) =>
-                    passwordConf === watch("password") || "Password and confirm password do not match",
+                  validate: (value) =>
+                    value === password || "Password and confirm password do not match",
                 })}
                 className="py-3 bg-transparent border border-white text-white text-sm rounded-lg block w-full ps-10 p-2.5 pr-12 placeholder-white"
-                placeholder="confirm your Password"
-                autoComplete="current-password"
+                placeholder="Confirm your Password"
+                autoComplete="new-password"
               />
 
               <FaKey className="absolute left-3 top-1/2 -translate-y-1/2 text-white text-lg" />
@@ -158,11 +163,11 @@ export default function ResetPassword() {
           </div>
 
           <button type="submit" disabled={isSubmitting} className="auth-button flex items-center justify-center gap-2">
-            {isSubmitting ? "submitting..." : "Reset"}
+            {isSubmitting ? "Submitting..." : "Reset"}
             <CheckIcon />
           </button>
         </form>
       </section>
     </>
   );
-}
+} 
