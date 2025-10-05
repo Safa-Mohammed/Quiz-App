@@ -56,6 +56,8 @@ const [show, setShow] = useState(false)
     else 
     {
     toast.success("Login successful!");
+            navigate("/dashboard");
+
     }
     
   };

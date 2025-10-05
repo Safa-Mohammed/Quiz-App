@@ -20,7 +20,7 @@ import {
   Register,
   ResetPassword,
 } from "./pages/AuthLayout";
-import { AuthLayout, MasterLayout } from "./components";
+import { AuthLayout, MasterLayout, ProtectedRoute } from "./components";
 
 //masterlayout
 import {
@@ -54,9 +54,9 @@ function App() {
     {
       path: "/dashboard",
       element: (
-        // <ProtectedRoute>
+        <ProtectedRoute>
         <MasterLayout />
-        // </ProtectedRoute>
+       </ProtectedRoute>
       ),
       children: [
         { index: true, element: <Dashboard /> },

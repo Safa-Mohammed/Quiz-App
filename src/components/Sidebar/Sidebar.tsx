@@ -64,7 +64,7 @@ const Sidebar: React.FC<SidebarProps> = ({
     },
     {
       id: "changePassword",
-      label: "Change Passord",
+      label: "Change Password",
       icon: <LiaUserLockSolid size={iconSize} />,
       path: "/change-password",
     },
