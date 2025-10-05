@@ -1,10 +1,11 @@
 // src/App.tsx
-
+import Cookies from "js-cookie";
+import { setToken } from "./redux/slices/authSlice";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
- 
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
  
 
@@ -35,6 +36,7 @@ import {
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
+  const dispatch = useDispatch();
   const router = createBrowserRouter([
     {
       path: "/",
@@ -71,11 +73,16 @@ function App() {
       element: <NotFoundPage />,
     },
   ]);
-
+  useEffect(() => {
+    const savedToken = Cookies.get("accessToken");
+    if (savedToken) {
+      dispatch(setToken(savedToken));
+    }
+  }, [dispatch]);
   return (
     <div>
       <RouterProvider router={router} />
-      <ToastContainer position="top-right" autoClose={5000} />
+      <ToastContainer position="top-center" autoClose={5000} />
     </div>
   );
 }
