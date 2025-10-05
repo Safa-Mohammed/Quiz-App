@@ -1,10 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 import axios from "axios";
 import Cookies from "js-cookie";
-import { toast } from 'react-toastify';
+import { createSlice, createAsyncThunk} from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthState {
   user: any | null;
+  token: string | null; 
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
@@ -13,12 +15,21 @@ const initialState: AuthState = {
   user: null,
   status: "idle",
   error: null,
+  token: null,
 };
 
-// Login thunk
-export const loginUser = createAsyncThunk(
+interface LoginResponse {
+  profile: any;
+  token: string;
+}
+
+export const loginUser = createAsyncThunk<
+  LoginResponse, 
+  { email: string; password: string }, 
+  { rejectValue: string } 
+>(
   "auth/loginUser",
-  async (credentials: { email: string; password: string }, thunkAPI) => {
+  async (credentials, thunkAPI) => {
     try {
       const response = await axios.post(
         "https://upskilling-egypt.com:3005/api/auth/login",
@@ -27,15 +38,21 @@ export const loginUser = createAsyncThunk(
 
       const data = response.data.data;
 
-      // Save tokens in cookies (for security)
-      Cookies.set("accessToken", data.accessToken, { expires: 1 }); 
+      Cookies.set("accessToken", data.accessToken, { expires: 1 });
       Cookies.set("refreshToken", data.refreshToken, { expires: 7 });
-      return data.profile; // return user profile to state
+      return { profile: data.profile, token: data.accessToken };
     } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response?.data?.message || "Login failed");
+      return thunkAPI.rejectWithValue(
+        error.response?.data?.message || "Login failed"
+      );
     }
   }
 );
+
+
+
+
+
 
 const authSlice = createSlice({
   name: "auth",
@@ -46,23 +63,29 @@ const authSlice = createSlice({
       Cookies.remove("accessToken");
       Cookies.remove("refreshToken");
     },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload; 
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(loginUser.pending, (state) => {
         state.status = "loading";
         state.error = null;
-      })
-      .addCase(loginUser.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.user = action.payload;
-      })
-      .addCase(loginUser.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.payload as string;
+      }).addCase(loginUser.fulfilled, (state, action) => {
+  state.status = "succeeded";
+  state.user = action.payload.profile;
+  state.token = action.payload.token; 
+})
+
+  .addCase(loginUser.rejected, (state, action) => {
+    state.status = "failed";
+    state.error = action.payload as string;
       });
+   
+
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setToken } = authSlice.actions;
 export default authSlice.reducer;

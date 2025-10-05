@@ -49,14 +49,15 @@ const [show, setShow] = useState(false)
   const onSubmit: SubmitHandler<LoginFormInputs> = async(data) => {
     dispatch(loginUser(data));
     const resultAction = await dispatch(loginUser(data));
-
-    // Check if login succeeded
-    if (loginUser.fulfilled.match(resultAction)) {
-      toast.success("login successfully")
-      // Navigate to dashboard
-      navigate("/dashboard");
+   if (loginUser.rejected.match(resultAction)) {
+    console.error("Login failed:", resultAction.payload);
+    toast.error(resultAction.payload as string);
+    } 
+    else 
+    {
+    toast.success("Login successful!");
     }
-    else toast.error("something wrong ")
+    
   };
 
 

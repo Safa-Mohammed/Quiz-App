@@ -12,6 +12,7 @@ export const EMAILVALIDATION={
                 required:"Password is Required",
 
               }
+              
  export const CONFIRM_PASSWORD_VALIDATION = (password: string) => ({
   required: "Confirm Password is required",
   validate: (value: string) =>
