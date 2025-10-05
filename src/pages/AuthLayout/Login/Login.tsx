@@ -198,7 +198,7 @@ const [show, setShow] = useState(false)
       transition
     "
   >
-    Sign Up
+    Sign In
     <span className="w-6 h-6 bg-black text-white rounded-full flex items-center justify-center font-bold text-[16px]">
       ✓
     </span>
@@ -209,7 +209,7 @@ const [show, setShow] = useState(false)
     <h1 className="text-white font-nunito text-[16px]">
       Forgot password?{" "}
       <Link
-        to="/reset-password"
+        to="/forget-password"
         className="text-[#C5D86D] font-bold hover:underline"
       >
         Click here
