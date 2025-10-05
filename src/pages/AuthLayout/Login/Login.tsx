@@ -209,7 +209,7 @@ const [show, setShow] = useState(false)
     <h1 className="text-white font-nunito text-[16px]">
       Forgot password?{" "}
       <Link
-        to="/reset-pass"
+        to="/reset-password"
         className="text-[#C5D86D] font-bold hover:underline"
       >
         Click here
