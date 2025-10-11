@@ -1,8 +1,8 @@
 import   authBackground from "./Image.png"
 import   logo from "./Logo-white.png"
 import   logoIcon from "./Logo icon.png"
-import   noDataImg from "./noData.png"
-import   deleteImg from "./delete-img.png"
+import   noDataImg from "./noData (1).png"
+import   deleteImg from "./delete-img .png"
 
 
 export{deleteImg}
