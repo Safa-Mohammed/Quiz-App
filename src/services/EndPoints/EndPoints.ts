@@ -32,3 +32,18 @@ export const Auth = {
   resetPassword: `/auth/reset-password`,
   logout: `/auth/logout`,
 };
+
+
+export const DASHBOARDENDPOINTS = {
+  FirstFiveIncoming:`${baseURL}/quiz/incomming`,
+  TopFiveStudents:`${baseURL}/student/top-five`,
+ GETSTUDENTDETAILS : (id: number ) => `${baseURL}/student/${id}`
+}
+
+
+export const GROUPSENDPOINTS = {
+  CREATEGROUP:`${baseURL}/group`,
+  GETALL:`${baseURL}/group`,
+  UPDATE:(id: string ) => `${baseURL}/group/${id}`,
+  DELETE:(id: string ) => `${baseURL}/group/${id}`
+}
