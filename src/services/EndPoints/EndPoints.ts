@@ -10,7 +10,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config) => {
-    const token = CookiesService.get("token");
+    const token = CookiesService.get("accessToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
