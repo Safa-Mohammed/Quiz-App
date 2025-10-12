@@ -43,7 +43,7 @@ export default function Pagination({
           onClick={() => goToPage(i + 1)}
           className={`px-3 py-1 border rounded-md ${
             currentPage === i + 1
-              ? "bg-gray-700 text-white"
+              ? "bg-gray-900 text-white"
               : "hover:bg-gray-100"
           }`}
         >

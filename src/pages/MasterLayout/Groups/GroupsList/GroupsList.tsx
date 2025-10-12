@@ -7,6 +7,7 @@ import { ModalHeader } from "../GroupsData/GroupsData";
 import { toast } from 'react-toastify';
 import CreatableSelect from "react-select/creatable";
 import Pagination from '../../../../components/Pagination/Pagination'
+import NoDataPage from "../../../../components/NoData/NoData";
 export default function GroupsList() {
 const [isOpen, setIsOpen] = useState(false);
 const [groups, setGroups] = useState<any[]>([]); 
@@ -457,14 +458,15 @@ return (
     ))
   ) : (
     <p className="text-gray-600 text-center col-span-full">No groups found</p>
+  
   )}
 </div>
-
+{groups.length > 0 ? (
  <Pagination
         totalItems={groups.length}
         itemsPerPage={itemsPerPage}
         onPageChange={(page) => setCurrentPage(page)}
-      />
+      />):<NoDataPage/>}
 </div>
   
 </div>
