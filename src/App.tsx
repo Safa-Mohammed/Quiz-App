@@ -32,6 +32,7 @@ import {
   ResultsView,
   StudentData,
   StudentList,
+   QuestionList
 } from "./pages/MasterLayout";
 
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
@@ -67,7 +68,8 @@ function App() {
         { path: "resultsView", element: <ResultsView /> },
         { path: "student-data", element: <StudentData /> },
         { path: "student-list", element: <StudentList /> },
-                { path: "quiz", element: <Quizzes /> },
+         { path: "quiz", element: <Quizzes /> },
+          {path:"questionList",element:<QuestionList/>}
 
       ],
     },
