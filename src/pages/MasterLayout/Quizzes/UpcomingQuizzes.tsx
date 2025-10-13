@@ -7,7 +7,20 @@ import {
   useGetGroupsQuery,
 } from "../../../services/EndPoints/quizApi";
 
-import type { Group, Quiz } from '../../../Interfaces/Interfaces'
+// upcomming quiz
+  interface Group {
+  _id: string;
+  name: string;
+  students: string[];
+}
+
+  interface Quiz {
+  _id: string;
+  title: string;
+  schadule: string;
+  status: string;
+  group: string;
+}
 
 
 const UpcomingQuizzes: React.FC = () => {

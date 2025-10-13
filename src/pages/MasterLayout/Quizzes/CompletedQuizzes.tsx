@@ -6,7 +6,26 @@ import {
   useGetGroupsQuery,
 } from "../../../services/EndPoints/completedQuizApi";
 
-import type { Group, Quiz } from '../../../Interfaces/Interfaces'
+  interface Quiz {
+  _id: string;
+  title: string;
+  description: string;
+  code: string;
+  status: string;
+  group: string;
+  questions_number: number;
+  duration: number;
+  score_per_question: number;
+  type: string;
+  difficulty: string;
+  closed_at?: string;
+  participants?: number;
+}
+
+  interface Group {
+  _id: string;
+  name: string;
+}
 
 
 
