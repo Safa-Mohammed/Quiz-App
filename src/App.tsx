@@ -7,8 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
- 
-
 // Shared
 import NotFoundPage from "./components/NotFound/NotFoundPage";
 
@@ -34,6 +32,7 @@ import {
   StudentList,
 } from "./pages/MasterLayout";
 
+
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 function App() {
@@ -45,7 +44,7 @@ function App() {
       children: [
         { index: true, element: <Login /> },
         { path: "login", element: <Login /> },
-        { path: "forget-password", element: <ForgetPassword/> },
+        { path: "forget-password", element: <ForgetPassword /> },
         { path: "reset-password", element: <ResetPassword /> },
         { path: "change-password", element: <ChangePassword /> },
         { path: "register", element: <Register /> },
@@ -55,8 +54,8 @@ function App() {
       path: "/dashboard",
       element: (
         <ProtectedRoute>
-        <MasterLayout />
-       </ProtectedRoute>
+          <MasterLayout />
+        </ProtectedRoute>
       ),
       children: [
         { index: true, element: <Dashboard /> },
@@ -67,8 +66,7 @@ function App() {
         { path: "resultsView", element: <ResultsView /> },
         { path: "student-data", element: <StudentData /> },
         { path: "student-list", element: <StudentList /> },
-                { path: "quiz", element: <Quizzes /> },
-
+        { path: "quiz", element: <Quizzes /> },
       ],
     },
     {
