@@ -3,7 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { GROUPSENDPOINTS } from "../../../../services";
 import Cookies from "js-cookie";
-import { ModalHeader } from "../GroupsData/GroupsData";
+import { ModalHeader } from "../../../../components/ModalHeader/ModalHeader";
 import { toast } from 'react-toastify';
 import CreatableSelect from "react-select/creatable";
 import Pagination from '../../../../components/Pagination/Pagination'
@@ -17,8 +17,8 @@ const [selectedGroup, setSelectedGroup] = useState<Group | null>(null);
 const [groupName, setGroupName] = useState("");
 const [selectedStudents, setSelectedStudents] = useState<string[]>([]);
 const [studentOptions, _setStudentOptions] = useState<any[]>([]);
-const [options, setOptions] = useState<any[]>([]);         // available items
-const [selectedValues, setSelectedValues] = useState<any[]>([]); // selected items
+const [options, setOptions] = useState<any[]>([]);        
+const [selectedValues, setSelectedValues] = useState<any[]>([]); 
 const [grpName, setGrpName] = useState("");
 const [currentPage, setCurrentPage] = useState(1);
 const itemsPerPage = 8;
@@ -103,9 +103,6 @@ const getAllGroups = async (): Promise<void> => {
   }
 };
  
-  //   setSelectedValues(newValue || []);
-  // };
-
   const handleCreate = (inputValue: string) => {
     const newOption = { value: inputValue, label: inputValue };
     setOptions((prev) => [...prev, newOption]);
