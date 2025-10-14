@@ -1,7 +1,6 @@
-// src/redux/api/studentApi.ts
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import CookiesService from "../CookiesService/CookiesService";
- 
+import CookiesService from "../../services/CookiesService/CookiesService";
+
 export const studentApi = createApi({
   reducerPath: "studentApi",
   baseQuery: fetchBaseQuery({
@@ -15,17 +14,23 @@ export const studentApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getGroups: builder.query<any[], void>({
-      query: () => "/group",
+    getGroups: builder.query({
+      query: () => `/group`,
     }),
-    getStudents: builder.query<any[], void>({
-      query: () => "/student",
+    getStudents: builder.query({
+      query: () => `/student`,
     }),
-    getQuizResults: builder.query<any[], void>({
-      query: () => "/quiz/result",
-    }),
-    getStudentById: builder.query<any, string>({
+    getStudentById: builder.query({
       query: (id) => `/student/${id}`,
+    }),
+    getQuizResults: builder.query({
+      query: () => `/quiz/result`,
+    }),
+    deleteStudent: builder.mutation({
+      query: (id: string) => ({
+        url: `/student/${id}`,
+        method: "DELETE",
+      }),
     }),
   }),
 });
@@ -33,6 +38,7 @@ export const studentApi = createApi({
 export const {
   useGetGroupsQuery,
   useGetStudentsQuery,
-  useGetQuizResultsQuery,
   useGetStudentByIdQuery,
+  useGetQuizResultsQuery,
+  useDeleteStudentMutation,
 } = studentApi;

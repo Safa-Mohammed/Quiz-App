@@ -9,7 +9,7 @@ type ModalHeaderProps = {
 export function ModalHeader({ title, onClose, onConfirm }: ModalHeaderProps) {
   return (
     <div className="flex flex-col border-b border-gray-300">
-      <div className="flex justify-between items-center p-2">
+      <div className="flex justify-between items-center p-3">
         {/* Left: Title */}
         <h2 className="text-xl font-bold text-black mb-0">{title}</h2>
 
