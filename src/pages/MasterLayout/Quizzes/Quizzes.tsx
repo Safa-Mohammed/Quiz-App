@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { QuizModalContainer } from "./Modalcontainer";
 import newQuizicon from "../../../assets/Images/new quiz icon.png";
 import VaultIcon from "../../../assets/Images/Vault icon.png";
+import ReactDOM from 'react-dom';
 import { CompletedQuizzesTable, UpcomingQuizzes } from "../../../components";
-
 const Quizzes = () => {
   const [showQuizModalContainer, setShowQuizModalContainer] = useState(false);
   const navigate = useNavigate();
@@ -39,11 +39,27 @@ const Quizzes = () => {
         </div>
 
         {/* Quiz Modal */}
-        {showQuizModalContainer && (
+        {/* {showQuizModalContainer && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <QuizModalContainer onClose={() => setShowQuizModalContainer(false)} />
           </div>
-        )}
+        )} */}
+        {showQuizModalContainer &&
+  ReactDOM.createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+      <div
+        className="absolute inset-0  bg-opacity-50"
+        onClick={() => setShowQuizModalContainer(false)}
+      ></div>
+
+     
+      <div className="relative z-10">
+        <QuizModalContainer onClose={() => setShowQuizModalContainer(false)} />
+      </div>
+    </div>,
+    document.body
+  )}
+
       </div>
 
       {/* RIGHT SECTION */}
