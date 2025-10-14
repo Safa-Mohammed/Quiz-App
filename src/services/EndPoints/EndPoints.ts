@@ -47,7 +47,7 @@ export const QUESTIONS_URLS = {
 export const QUIZZES_URL = {
   GET_FIRSTFIVEINCOMING: `/quiz/incomming`,
   GET_LASTFIVECOMPLETED: `/quiz/completed`,
-  CREATE_NEW_QUIZE: `/quiz`,
+  CREATE_NEW_QUIZE: `${baseURL}/quiz`,
   CET_ALL_QUIZZES: `/quiz`,
   GET_QUIZ_DETAILS: (id: string) => `/quiz/${id}`,
 };
