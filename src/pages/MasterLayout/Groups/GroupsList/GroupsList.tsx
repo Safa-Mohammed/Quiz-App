@@ -283,7 +283,7 @@ return (
             Group: {group.name}
           </h2>
           <p className="text-gray-600 text-sm">
-            No. of students: {group.max_students}
+            No. of students: {group.students.length}
           </p>
         </div>
 
@@ -361,6 +361,7 @@ return (
           }
           placeholder="List Students"
         />
+
 
         <div className="mt-3">
           <strong>Selected:</strong>{" "}
