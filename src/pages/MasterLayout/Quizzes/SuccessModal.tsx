@@ -1,5 +1,5 @@
 import { Check } from "lucide-react";
-import { Folders } from "lucide-react";
+import { Copy } from "lucide-react";
 type SuccessModalProps = {
   onClose: () => void;
   code?: string; 
@@ -28,10 +28,9 @@ export const SuccessModal: React.FC<SuccessModalProps> = ({ onClose, code }) => 
   <span className="absolute left-0 top-0 h-full flex rounded-lg items-center justify-center rounded-l-lg bg-[#FFEDDF] px-4 text-gray-700 pointer-events-none">
     code  
   </span>
-    <span className="absolute right-0 top-0 h-full flex items-center justify-center gap-2  px-4 rounded-l-lg pointer-events-none">
-        <Folders size={20} />
-  
-      </span>
+ <span className="absolute right-0 top-0 h-full flex items-center justify-center gap-2 px-4 rounded-l-lg cursor-pointer">
+  <Copy size={20} />
+</span>
 
 </div>
 

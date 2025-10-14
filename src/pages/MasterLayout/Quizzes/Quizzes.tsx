@@ -2,6 +2,10 @@ import  {QuizModalContainer} from'./Modalcontainer'
 import newQuizicon from "../../../assets/Images/new quiz icon.png"
 import VaultIcon from "../../../assets/Images/Vault icon.png"
 import { useState } from 'react';
+import ReactDOM from "react-dom";
+
+
+
 const Quizzes = () => {
   const [showQuizModalContainer, setShowQuizModalContainer] = useState(false);
 
@@ -23,12 +27,29 @@ const Quizzes = () => {
   </h2>
 </div>
 
-{showQuizModalContainer && (
-  <div className="fixed inset-0 z-50 flex items-center justify-center">
+{/* {showQuizModalContainer && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center ">
     <QuizModalContainer onClose={() => setShowQuizModalContainer(false)} />
   </div>
-)}
+)} */}
 
+
+
+{showQuizModalContainer &&
+  ReactDOM.createPortal(
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center">
+      <div
+        className="absolute inset-0  bg-opacity-50"
+        onClick={() => setShowQuizModalContainer(false)}
+      ></div>
+
+     
+      <div className="relative z-10">
+        <QuizModalContainer onClose={() => setShowQuizModalContainer(false)} />
+      </div>
+    </div>,
+    document.body
+  )}
 
   {/* Second icon + text */}
   <div className="flex  flex-col items-center gap-2 p-8 border-2 rounded-lg">
