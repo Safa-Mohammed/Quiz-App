@@ -41,7 +41,7 @@ export default function MasterLayout() {
 
       {/* Page content */}
       <main
-        className="flex-1 transition-all duration-300 min-h-screen bg-gray-50"
+        className="flex-1 transition-all duration-300 min-h-screen bg-white"
         style={{
           marginLeft: !isMobile ? sidebarWidth : 0,
         }}

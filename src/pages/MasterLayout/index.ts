@@ -7,6 +7,8 @@ export {default as Quizzes} from './Quizzes/Quizzes'
 export {default as GroupsData} from './Groups/GroupsData/GroupsData'
 export {default as GroupsList} from './Groups/GroupsList/GroupsList'
 export {default as QuestionList} from './Question/QuestionList'
+export {default as QuziDeatils} from './Quizzes/quizDeatils'
+
 
 
 
