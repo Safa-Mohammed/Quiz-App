@@ -6,6 +6,7 @@ import {
   useGetUpcomingQuizzesQuery,
   useGetGroupsQuery,
 } from "../../../services/EndPoints/quizApi";
+import { useNavigate } from "react-router-dom";
 
 // upcomming quiz
   interface Group {
@@ -24,6 +25,8 @@ import {
 
 
 const UpcomingQuizzes: React.FC = () => {
+    const navigate = useNavigate();
+
   const {
     data: quizzesData,
     isLoading: quizzesLoading,
@@ -104,9 +107,14 @@ const UpcomingQuizzes: React.FC = () => {
                 </div>
 
                 {/* Status */}
-                <div className="flex items-center gap-2 text-[#C5D86D] font-medium px-2">
-                  {quiz.status === "open" ? "Open" : "Closed"} <FaArrowRight />
-                </div>
+                   <div
+      className="flex items-center gap-2 text-[#C5D86D] font-medium px-2 cursor-pointer"
+onClick={() =>
+  navigate(`/dashboard/quizdetails/${quiz._id}`, { state: { quiz } })
+}
+    >
+      {quiz.status === "open" ? "Open" : "Closed"} <FaArrowRight />
+    </div>
               </div>
             );
           })}

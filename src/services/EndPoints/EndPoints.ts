@@ -32,3 +32,37 @@ export const Auth = {
   resetPassword: `/auth/reset-password`,
   logout: `/auth/logout`,
 };
+
+/************* Questions EndPoints ******************/
+export const QUESTIONS_URLS = {
+  GET_ALL_QUESTIONS: "/question",
+  ADD_QUESTION: "/question",
+  UPDATE_QUESTION: (id: string) => `/question/${id}`,
+  DELETE_QUESTION: (id: string) => `/question/${id}`,
+  GET_QUESTION_BY_ID: (id: string) => `/question/${id}`,
+};
+
+
+/************* Quizzes EndPoints ******************/
+export const QUIZZES_URL = {
+  GET_FIRSTFIVEINCOMING: `/quiz/incomming`,
+  GET_LASTFIVECOMPLETED: `/quiz/completed`,
+  CREATE_NEW_QUIZE: `/quiz`,
+  CET_ALL_QUIZZES: `/quiz`,
+  GET_QUIZ_DETAILS: (id: string) => `/quiz/${id}`,
+};
+
+
+export const DASHBOARDENDPOINTS = {
+  FirstFiveIncoming:`${baseURL}/quiz/incomming`,
+  TopFiveStudents:`${baseURL}/student/top-five`,
+ GETSTUDENTDETAILS : (id: number ) => `${baseURL}/student/${id}`
+}
+
+
+export const GROUPSENDPOINTS = {
+  CREATEGROUP:`${baseURL}/group`,
+  GETALL:`${baseURL}/group`,
+  UPDATE:(id: string ) => `${baseURL}/group/${id}`,
+  DELETE:(id: string ) => `${baseURL}/group/${id}`
+}

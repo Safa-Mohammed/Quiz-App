@@ -30,7 +30,10 @@ import {
   ResultsView,
   StudentData,
   StudentList,
+   QuestionList
 } from "./pages/MasterLayout";
+import QuizDeatils from "./pages/MasterLayout/Quizzes/quizDeatils";
+import UpcomingQuizzes from "./pages/MasterLayout/Quizzes/UpcomingQuizzes";
 
 
 // import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
@@ -66,7 +69,16 @@ function App() {
         { path: "resultsView", element: <ResultsView /> },
         { path: "student-data", element: <StudentData /> },
         { path: "student-list", element: <StudentList /> },
-        { path: "quiz", element: <Quizzes /> },
+         { path: "quiz", element: <Quizzes /> },
+          {path:"questionList",element:<QuestionList/>},
+
+          {path:"upcommingQuiz",element:<UpcomingQuizzes/>},
+
+
+          
+          
+          {path:"/dashboard/quizdetails/:id",element:<QuizDeatils/>}
+
       ],
     },
     {
